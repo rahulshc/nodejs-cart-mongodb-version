@@ -1,18 +1,30 @@
-const Sequelize = require('sequelize');
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-const sequelize = new Sequelize('nodejs-cart', 'root', '5656#rST', {
-    dialect: 'mysql',
-    host: 'localhost'
+let _db;
+const mongoConnect = callback => {
+    MongoClient.connect(process.env.MONGODB_URI)
+.then(client=> {
+    //console.log('Connected!');
+    _db=client.db();//to connect to a different database we have to pass option to db like db('qms')
+    callback();
+})
+.catch(err=> {
+    console.log(err);
+    throw err;
 });
+}
 
-module.exports = sequelize;
-/*const mysql = require('mysql2');
+//connection pool otherwise we shall have to connect using connection string again and again
+const getDb = () => {
+    if(_db){
+        return _db;
+    }
 
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    database: 'nodejs-cart',
-    password: '5656#rST'
-});
+    throw 'No Database Found!';
+}
 
-module.exports=pool.promise();*/
+//module.exports=mongoConnect;
+exports.mongoConnect=mongoConnect;
+exports.getDb=getDb;
+

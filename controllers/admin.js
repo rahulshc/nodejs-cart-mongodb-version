@@ -13,25 +13,20 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Product(null, title, imageUrl, description, price);
-  req.user.createProduct({
-    title: title,
-    imageUrl: imageUrl,
-    price: price,
-    description: description,
-    //userId: req.user.id not required in magic association
-  })//magic association
-  .then(result=>{
-   //console.log(result);
-    res.redirect('/admin/products');
-  })
-  .catch(err=> {
+  const product = new Product( title, price, imageUrl, description);
+
+  product.save()
+  .then(result=> {
+    console.log('Created Product');
+    res.redirect('/admin/products')
+  }).catch(err => {
     console.log(err);
   });
   
+  
 };
 
-exports.getEditProduct = (req, res, next) => {
+/*exports.getEditProduct = (req, res, next) => {
   const editMode = req.query.edit;
   if (!editMode) {
     return res.redirect('/');
@@ -108,4 +103,4 @@ exports.postDeleteProduct = (req, res, next) => {
     console.log(err);
   });
   
-};
+};*/
