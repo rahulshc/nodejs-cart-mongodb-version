@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-cart-mongodb-version",
+  "version": "1.0.0",
+  "description": "Node Js shopping cart having mongodb as database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulshc/nodejs-cart-mongodb-version.git"
+  },
+  "author": "Rahul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rahulshc/nodejs-cart-mongodb-version/issues"
+  },
+  "homepage": "https://github.com/rahulshc/nodejs-cart-mongodb-version#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
