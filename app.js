@@ -10,7 +10,7 @@ const adminRoutes=require('./routes/admin');//
 const shopRoutes = require('./routes/shop');
 const errorController=require('./controllers/error');
 const mongoConnect = require('./util/database').mongoConnect;
-
+const User = require('./models/user');
 //between creating app and creatig server we can add middlewares
 
 
@@ -24,13 +24,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));//makes the public folder statically available to front end
 
 app.use((req, res, next) => {
-    /*User.findByPk(1)
+    User.findById('5e5e8bb61c9d44000012950f')
     .then(user=> {
-        req.user=user;//not a simple object but a sequelize object hence we can destroy that as well
+        req.user=new User(user.name, user.email, user.cart, user._id);
         next();
     })
-    .catch(err=> console.log(err));*/
-    next();
+    .catch(err=> console.log(err));
 });
 //can use multipe static folders
 //order of admin routes and shop routes matters here if we used app.use in admin and shop routes
